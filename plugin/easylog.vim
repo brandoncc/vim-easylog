@@ -23,7 +23,12 @@ function! s:Python_Log() abort
   execute "normal! yiwoprint(\"\<esc>pa\", \<esc>pa)"
 endfunction
 
-function! s:Find_File_Type() abort
+function! s:UnSupport_Log() abort
+  let l:msg="<Not support this filetype. 尚不支持此文件类型>"
+  execute "normal! o".l:msg
+endfunction
+
+function! s:Match_File_Type() abort
   if &filetype ==# 'vim'
     call s:Vim_Log()
   elseif &filetype ==# 'javascript'
@@ -32,9 +37,11 @@ function! s:Find_File_Type() abort
     call s:Go_Log()
   elseif &filetype ==# 'python'
     call s:Python_Log()
+  else
+    call s:UnSupport_Log()
   endif
 endfunction
 
-nnoremap <plug>(Easy_log) :<C-u>call <SID>Find_File_Type()<cr>
+nnoremap <plug>(Easy_log) :<C-u>call <SID>Match_File_Type()<cr>
 nmap <leader>l <Plug>(Easy_log)
 
