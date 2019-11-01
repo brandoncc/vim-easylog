@@ -7,21 +7,20 @@
 " endif
 " let g:loaded_easylog = 1
 
-function! s:Js_Log() abort
-  execute "normal! yiwoconsole.log(\"\<esc>pa\", \<esc>pa)"
+let s:log_map={
+      \'javascript':'console.log',
+      \'go':'fmt.Println',
+      \'python':'print',
+      \}
+
+function! s:Normal_Log_Model(language) abort
+  execute "normal! yiwo".s:log_map[a:language]."(\"\<esc>pa\", \<esc>pa)"
 endfunction
 
 function! s:Vim_Log() abort
   execute "normal! yiwoecho \<esc>p"
 endfunction
 
-function! s:Go_Log() abort
-  execute "normal! yiwofmt.Println(\"\<esc>pa\", \<esc>pa)"
-endfunction
-
-function! s:Python_Log() abort
-  execute "normal! yiwoprint(\"\<esc>pa\", \<esc>pa)"
-endfunction
 
 function! s:UnSupport_Log() abort
   let l:msg="<Not support this filetype. 尚不支持此文件类型>"
@@ -32,11 +31,11 @@ function! s:Match_File_Type() abort
   if &filetype ==# 'vim'
     call s:Vim_Log()
   elseif &filetype ==# 'javascript'
-    call s:Js_Log()
+    call s:Normal_Log_Model('javascript')
   elseif &filetype ==# 'go'
-    call s:Go_Log()
+    call s:Normal_Log_Model('go')
   elseif &filetype ==# 'python'
-    call s:Python_Log()
+    call s:Normal_Log_Model('python')
   else
     call s:UnSupport_Log()
   endif
