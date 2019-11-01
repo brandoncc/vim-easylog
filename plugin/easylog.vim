@@ -41,7 +41,7 @@ function! s:Match_File_Type() abort
   endif
 endfunction
 
-nnoremap <plug>(Easy_log) :<C-u>call <SID>Match_File_Type()
+nnoremap <plug>(Easy_log) :<C-u>call <SID>Match_File_Type()<cr>
 
 if !hasmapto('<plug>(Easy_log)') || maparg('<leader>l', 'n') ==# ''
   nmap <leader>l <Plug>(Easy_log)
