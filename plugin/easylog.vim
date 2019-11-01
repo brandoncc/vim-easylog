@@ -19,6 +19,10 @@ function! s:Go_Log() abort
   execute "normal! yiwofmt.Println(\"\<esc>pa\", \<esc>pa)"
 endfunction
 
+function! s:Python_Log() abort
+  execute "normal! yiwoprint(\"\<esc>pa\", \<esc>pa)"
+endfunction
+
 function! s:Find_File_Type() abort
   if &filetype ==# 'vim'
     call s:Vim_Log()
@@ -26,6 +30,8 @@ function! s:Find_File_Type() abort
     call s:Js_Log()
   elseif &filetype ==# 'go'
     call s:Go_Log()
+  elseif &filetype ==# 'python'
+    call s:Python_Log()
   endif
 endfunction
 
