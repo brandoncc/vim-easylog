@@ -1,4 +1,4 @@
-"easylog.vim - log vaiable easily
+" easylog.vim - log vaiable easily
 " Author: Joey
 " Version: 0.0.0
 
@@ -7,8 +7,28 @@
 " endif
 " let g:loaded_easylog = 1
 
-function! s:Js_log() abort
-  echo "1"
-  normal! yiwoconsole.log()\<Esc>
+function! s:Js_Log() abort
+  execute "normal! yiwoconsole.log(\"\<esc>pa\", \<esc>pa)"
 endfunction
-noremap <buffer> <localleader>l :call s:Js_log()<cr>
+
+function! s:Vim_Log() abort
+  execute "normal! yiwoecho \<esc>p"
+endfunction
+
+function! s:Go_Log() abort
+  execute "normal! yiwofmt.Println(\"\<esc>pa\", \<esc>pa)"
+endfunction
+
+function! s:Find_File_Type() abort
+  if &filetype ==# 'vim'
+    call s:Vim_Log()
+  elseif &filetype ==# 'javascript'
+    call s:Js_Log()
+  elseif &filetype ==# 'go'
+    call s:Go_Log()
+  endif
+endfunction
+
+nnoremap <plug>(Easy_log) :<C-u>call <SID>Find_File_Type()<cr>
+nmap <leader>l <Plug>(Easy_log)
+
