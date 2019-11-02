@@ -5,8 +5,8 @@
 " todo：
 " -[x] v模式下打印
 " -[x] L打印在上方
-" -[] 深拷贝打印
 " -[] 重新映射
+" -[] 深拷贝打印
 
 if exists("g:loaded_easylog") || v:version < 700
   finish
@@ -80,32 +80,30 @@ function! s:Match_File_Type(mode, is_upper) abort
   endif
 endfunction
 
-
-" ---- normal = 0 ---- {{{
+" normal=0, visual=1
 nnoremap <plug>(Normal_Easy_Log) :<C-u>call <SID>Match_File_Type(0, v:false)<cr>
+
+nnoremap <plug>(Normal_Upper_Easy_Log) :<C-u>call <SID>Match_File_Type(0, v:true)<cr>
+
+vnoremap <plug>(Visual_Easy_Log) :<C-u>call <SID>Match_File_Type(1, v:false)<cr>
+
+vnoremap <plug>(Visual_Upper_Easy_Log) :<C-u>call <SID>Match_File_Type(1, v:true)<cr>
+
+
 
 if !hasmapto('<plug>(Normal_Easy_Log)') || maparg('<leader>l', 'n') ==# ''
   nmap <leader>l <Plug>(Normal_Easy_Log)
 endif
 
-nnoremap <plug>(Normal_Upper_Easy_Log) :<C-u>call <SID>Match_File_Type(0, v:true)<cr>
-
 if !hasmapto('<plug>(Normal_Upper_Easy_Log)') || maparg('<leader>L', 'n') ==# ''
   nmap <leader>L <Plug>(Normal_Upper_Easy_Log)
 endif
-" }}}
-
-
-" --- visual = 1 --- {{{
-vnoremap <plug>(Visual_Easy_Log) :<C-u>call <SID>Match_File_Type(1, v:false)<cr>
 
 if !hasmapto('<plug>(Visual_Easy_Log)') || maparg('<leader>l', 'v') ==# ''
   vmap <leader>l <Plug>(Visual_Easy_Log)
 endif
 
-vnoremap <plug>(Visual_Upper_Easy_Log) :<C-u>call <SID>Match_File_Type(1, v:true)<cr>
 
 if !hasmapto('<plug>(Visual_Upper_Easy_Log)') || maparg('<leader>L', 'v') ==# ''
   vmap <leader>L <Plug>(Visual_Upper_Easy_Log)
 endif
-" }}}
