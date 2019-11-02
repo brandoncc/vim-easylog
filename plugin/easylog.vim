@@ -90,7 +90,6 @@ vnoremap <plug>(Visual_Easy_Log) :<C-u>call <SID>Match_File_Type(1, v:false)<cr>
 vnoremap <plug>(Visual_Upper_Easy_Log) :<C-u>call <SID>Match_File_Type(1, v:true)<cr>
 
 
-
 if !hasmapto('<plug>(Normal_Easy_Log)') || maparg('<leader>l', 'n') ==# ''
   nmap <leader>l <Plug>(Normal_Easy_Log)
 endif
@@ -102,7 +101,6 @@ endif
 if !hasmapto('<plug>(Visual_Easy_Log)') || maparg('<leader>l', 'v') ==# ''
   vmap <leader>l <Plug>(Visual_Easy_Log)
 endif
-
 
 if !hasmapto('<plug>(Visual_Upper_Easy_Log)') || maparg('<leader>L', 'v') ==# ''
   vmap <leader>L <Plug>(Visual_Upper_Easy_Log)
