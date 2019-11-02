@@ -4,8 +4,9 @@
 
 " todo：
 " -[x] v模式下打印
+" -[x] L打印在上方
 " -[] 深拷贝打印
-" -[] L打印在上方
+" -[] 重新映射
 
 if exists("g:loaded_easylog") || v:version < 700
   finish
@@ -38,12 +39,23 @@ endfunction
 " }}}
 
 
-function! s:Normal_Log_Model(language, word) abort
-  execute "normal! o".s:log_map[a:language]."(\"".a:word."\", ".a:word.")"
+function! s:Normal_Log_Model(language, word, is_upper) abort
+  if a:is_upper
+    let l:next_line="O"
+  else
+    let l:next_line="o"
+  endif
+  execute "normal! ".l:next_line.s:log_map[a:language]."(\"".a:word."\", ".a:word.")"
 endfunction
 
-function! s:Vim_Log() abort
-  execute "normal! oechom ".a:word
+
+function! s:Vim_Log(word, is_upper) abort
+  if a:is_upper
+    let l:next_line="O"
+  else
+    let l:next_line="o"
+  endif
+  execute "normal! ".l:next_line."echom ".a:word
 endfunction
 
 function! s:UnSupport_Log() abort
@@ -52,7 +64,7 @@ function! s:UnSupport_Log() abort
 endfunction
 
 
-function! s:Match_File_Type(mode) abort
+function! s:Match_File_Type(mode, is_upper) abort
   if a:mode == 0
     let l:word = expand("<cword>")
   elseif a:mode ==1
@@ -60,24 +72,40 @@ function! s:Match_File_Type(mode) abort
   endif
 
   if has_key(s:log_map, &filetype)
-    call s:Normal_Log_Model(&filetype, l:word)
+    call s:Normal_Log_Model(&filetype, l:word, a:is_upper)
   elseif &filetype ==# 'vim'
-    call s:Vim_Log(l:word)
+    call s:Vim_Log(l:word, a:is_upper)
   else
     call s:UnSupport_Log()
   endif
 endfunction
 
 
-" normal=0, visual=1
-nnoremap <plug>(Normal_Easy_Log) :<C-u>call <SID>Match_File_Type(0)<cr>
+" ---- normal = 0 ---- {{{
+nnoremap <plug>(Normal_Easy_Log) :<C-u>call <SID>Match_File_Type(0, v:false)<cr>
 
-if !hasmapto('<plug>(Easy_log)') || maparg('<leader>l', 'n') ==# ''
+if !hasmapto('<plug>(Normal_Easy_Log)') || maparg('<leader>l', 'n') ==# ''
   nmap <leader>l <Plug>(Normal_Easy_Log)
 endif
 
-vnoremap <plug>(Visual_Easy_Log) :<C-u>call <SID>Match_File_Type(1)<cr>
+nnoremap <plug>(Normal_Upper_Easy_Log) :<C-u>call <SID>Match_File_Type(0, v:true)<cr>
+
+if !hasmapto('<plug>(Normal_Upper_Easy_Log)') || maparg('<leader>L', 'n') ==# ''
+  nmap <leader>L <Plug>(Normal_Upper_Easy_Log)
+endif
+" }}}
+
+
+" --- visual = 1 --- {{{
+vnoremap <plug>(Visual_Easy_Log) :<C-u>call <SID>Match_File_Type(1, v:false)<cr>
 
 if !hasmapto('<plug>(Visual_Easy_Log)') || maparg('<leader>l', 'v') ==# ''
   vmap <leader>l <Plug>(Visual_Easy_Log)
 endif
+
+vnoremap <plug>(Visual_Upper_Easy_Log) :<C-u>call <SID>Match_File_Type(1, v:true)<cr>
+
+if !hasmapto('<plug>(Visual_Upper_Easy_Log)') || maparg('<leader>L', 'v') ==# ''
+  vmap <leader>L <Plug>(Visual_Upper_Easy_Log)
+endif
+" }}}
