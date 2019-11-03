@@ -1,1 +1,29 @@
-*easylog.txt*
+*easylog.txt* <leader>l to wrap log sentence
+
+Author: Joey <https://github.com/joeyZhouYicheng>
+
+
+_______ _______ _______ __   __ |       _____   ______
+|______ |_____| |______   \_/   |      |     | |  ____
+|______ |     | ______|    |    |_____ |_____| |_____|
+
+====================================================================
+*easylog*
+
+- `<leader>l` to wrap log sentence.
+- `<leader>L` to print it at upper line.
+
+
+Supported languages:
+
+  - javascript
+console.log()
+
+  - golang
+fmt.Println()
+
+  - python
+print()
+
+  - vimscript
+  echom
