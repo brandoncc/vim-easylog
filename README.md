@@ -37,7 +37,7 @@ Supported languages:
 - vimscript
   `echom`
 
-![image-20191102204818239](https://tva1.sinaimg.cn/large/006y8mN6gy1g8jzh05jxlj302u018jr9.jpg)
+![image-20191104213820349](https://tva1.sinaimg.cn/large/006y8mN6gy1g8mc5qbdu7j305001wjrh.jpg)
 
 ## TODO:
 
