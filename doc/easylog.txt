@@ -31,3 +31,26 @@ print()
 
   - vimscript
   echom
+
+  ====================================================================
+  *configuration*
+
+  ------------------------------------------------------------------------------
+  g:easy_log_configuration_map                           *configuration_map*
+
+  To wrap log sentence downside
+  You could set to your favorite key, for example:
+
+  let g:easy_log_configuration_map = '<leader><leader>l'
+
+  Default: '<leader>l'
+
+  ------------------------------------------------------------------------------
+  g:easy_log_upper_configuration_map                   *upper_configuration_map*
+
+  To wrap log sentence upperside
+  You could set to your favorite key, for example:
+
+  let g:easy_log_upper_configuration_map = '<leader><leader>L'
+
+  Default: '<leader>L'

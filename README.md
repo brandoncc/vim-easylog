@@ -1,7 +1,7 @@
 # vim-easylog
 `<leader>l` to wrap log sentence.
 
-## Introduction
+## Usage
 
 `<leader>l` to wrap log sentence. `<leader>L` to print it at upper line. 
 
@@ -39,9 +39,17 @@ Supported languages:
 
 ![image-20191104213820349](https://tva1.sinaimg.cn/large/006y8mN6gy1g8mc5qbdu7j305001wjrh.jpg)
 
+## Configuration
+
+- `g:easy_log_configuration_map`
+  log downside, default `<leader>l`
+
+- `g:easy_log_upper_configuration_map`
+  log upperside, default`<leader>L`
+
 ## TODO:
 
-- [ ] remap
+- [x] configuration remap
 - [ ] deep copy
 - [ ] customization
   modify the log sentences
