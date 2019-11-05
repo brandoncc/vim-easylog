@@ -92,31 +92,28 @@ vnoremap <plug>(Visual_Upper_Easy_Log) :<C-u>call <SID>Match_File_Type(1, v:true
 
 
 if !exists('g:easy_log_configuration_map')
+  let g:easy_log_configuration_map='<leader>l'
+endif
 
-  if !hasmapto('<plug>(Normal_Easy_Log)') || maparg('<leader>l', 'n') ==# ''
-    nmap <leader>l <Plug>(Normal_Easy_Log)
-  endif
+if !exists('g:easy_log_upper_configuration_map')
+  let g:easy_log_upper_configuration_map='<leader>L'
+endif
 
-  if !hasmapto('<plug>(Visual_Easy_Log)') || maparg('<leader>l', 'v') ==# ''
-    vmap <leader>l <Plug>(Visual_Easy_Log)
-  endif
 
-else
+if !hasmapto('<plug>(Normal_Easy_Log)') || maparg(g:easy_log_configuration_map, 'n') ==# ''
   execute 'nmap '.g:easy_log_configuration_map.' <Plug>(Normal_Easy_Log)'
+endif
+
+if !hasmapto('<plug>(Visual_Easy_Log)') || maparg('<leader>l', 'v') ==# ''
   execute 'vmap '.g:easy_log_configuration_map.' <Plug>(Visual_Easy_Log)'
 endif
 
 
-if !exists('g:easy_log_upper_configuration_map')
-  if !hasmapto('<plug>(Normal_Upper_Easy_Log)') || maparg('<leader>L', 'n') ==# ''
-    nmap <leader>L <Plug>(Normal_Upper_Easy_Log)
-  endif
-
-  if !hasmapto('<plug>(Visual_Upper_Easy_Log)') || maparg('<leader>L', 'v') ==# ''
-    vmap <leader>L <Plug>(Visual_Upper_Easy_Log)
-  endif
-else
+if !hasmapto('<plug>(Normal_Upper_Easy_Log)') || maparg(g:easy_log_upper_configuration_map, 'n') ==# ''
   execute 'nmap '.g:easy_log_upper_configuration_map.' <Plug>(Normal_Upper_Easy_Log)'
+endif
+
+if !hasmapto('<plug>(Visual_Upper_Easy_Log)') || maparg(g:easy_log_upper_configuration_map, 'v') ==# ''
   execute 'vmap '.g:easy_log_upper_configuration_map.' <Plug>(Visual_Upper_Easy_Log)'
 endif
 
