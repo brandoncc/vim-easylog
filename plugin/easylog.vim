@@ -7,8 +7,9 @@
 " -[x] L打印在上方
 " -[] 重新映射
 " -[] 深拷贝打印
+" -[] 变量类型打印
 
-if exists("g:loaded_easylog") || v:version < 700
+if exists("g:loaded_easylog") || v:version < 700 || &cp
   finish
 endif
 let g:loaded_easylog = 1
@@ -90,18 +91,32 @@ vnoremap <plug>(Visual_Easy_Log) :<C-u>call <SID>Match_File_Type(1, v:false)<cr>
 vnoremap <plug>(Visual_Upper_Easy_Log) :<C-u>call <SID>Match_File_Type(1, v:true)<cr>
 
 
-if !hasmapto('<plug>(Normal_Easy_Log)') || maparg('<leader>l', 'n') ==# ''
-  nmap <leader>l <Plug>(Normal_Easy_Log)
+if !exists('g:easy_log_configuration_map')
+
+  if !hasmapto('<plug>(Normal_Easy_Log)') || maparg('<leader>l', 'n') ==# ''
+    nmap <leader>l <Plug>(Normal_Easy_Log)
+  endif
+
+  if !hasmapto('<plug>(Visual_Easy_Log)') || maparg('<leader>l', 'v') ==# ''
+    vmap <leader>l <Plug>(Visual_Easy_Log)
+  endif
+
+else
+  execute 'nmap '.g:easy_log_configuration_map.' <Plug>(Normal_Easy_Log)'
+  execute 'vmap '.g:easy_log_configuration_map.' <Plug>(Visual_Easy_Log)'
 endif
 
-if !hasmapto('<plug>(Normal_Upper_Easy_Log)') || maparg('<leader>L', 'n') ==# ''
-  nmap <leader>L <Plug>(Normal_Upper_Easy_Log)
+
+if !exists('g:easy_log_upper_configuration_map')
+  if !hasmapto('<plug>(Normal_Upper_Easy_Log)') || maparg('<leader>L', 'n') ==# ''
+    nmap <leader>L <Plug>(Normal_Upper_Easy_Log)
+  endif
+
+  if !hasmapto('<plug>(Visual_Upper_Easy_Log)') || maparg('<leader>L', 'v') ==# ''
+    vmap <leader>L <Plug>(Visual_Upper_Easy_Log)
+  endif
+else
+  execute 'nmap '.g:easy_log_upper_configuration_map.' <Plug>(Normal_Upper_Easy_Log)'
+  execute 'vmap '.g:easy_log_upper_configuration_map.' <Plug>(Visual_Upper_Easy_Log)'
 endif
 
-if !hasmapto('<plug>(Visual_Easy_Log)') || maparg('<leader>l', 'v') ==# ''
-  vmap <leader>l <Plug>(Visual_Easy_Log)
-endif
-
-if !hasmapto('<plug>(Visual_Upper_Easy_Log)') || maparg('<leader>L', 'v') ==# ''
-  vmap <leader>L <Plug>(Visual_Upper_Easy_Log)
-endif
