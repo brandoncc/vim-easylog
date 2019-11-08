@@ -1,13 +1,6 @@
 " easylog.vim - log vaiable easily
 " Author: Joey
-" Version: 0.0.1
-
-" todo：
-" -[x] v模式下打印
-" -[x] L打印在上方
-" -[x] 重新映射
-" -[] 深拷贝打印
-" -[] 变量类型打印
+" Version: 0.1.0
 
 if exists("g:loaded_easylog") || v:version < 700 || &compatible
   finish
@@ -20,12 +13,14 @@ let s:log_map={
       \'javascript':['console.log("', '", ', ')'],
       \'go':['fmt.Println("', '", ', ')'],
       \'python':['print("', '", ', ')'],
-      \'vim':['echom "', ': ".',''],
+      \'vim':['echo "', ': "',''],
       \}
 
 let s:type_map={
-      \'javascript':['console.log("', ' ", Object.prototype.toString.call(', ')'],
-      \'go':['fmt.Printf("', ': %T", ', ')'],
+      \'javascript':['console.log("', ': ", Object.prototype.toString.call(', '))'],
+      \'go':['fmt.Printf("', ': %T\n", ', ')'],
+      \'python':['print("', ': ", type(', '))'],
+      \'vim':['echom "', ': ".type(',')'],
       \}
 " }}}
 
@@ -57,7 +52,6 @@ endfunction
 " l:next_log_line
 " l:easy_log_mode      " normal=0, visual=1
 " l:selected_word
-" l:log_code_map       " normal=0, type=1, deep_copy=2
 
 function! s:Easy_Log_Main(mode, log_code, is_upper) abort
   if a:mode == 0         " normal
@@ -91,7 +85,7 @@ endfunction
 " ==== 所有映射 ====={{{
 " 抽象一时爽，写入口火葬场
 " normal=0, visual=1
-" normal=0, type=1, deep_copy=2
+" normal=0, type=1
 
 nnoremap <plug>(Normal_Easy_Log) :<C-u>call <SID>Easy_Log_Main(0, 0, v:false)<cr>
 
@@ -110,31 +104,16 @@ vnoremap <plug>(Visual_Type_Easy_Log) :<C-u>call <SID>Easy_Log_Main(1, 1, v:fals
 
 vnoremap <plug>(Visual_Type_Upper_Easy_Log) :<C-u>call <SID>Easy_Log_Main(1, 1, v:true)<cr>
 
-
-nnoremap <plug>(Normal_Deep_Copy_Easy_Log) :<C-u>call <SID>Easy_Log_Main(0, 2, v:false)<cr>
-
-nnoremap <plug>(Normal_Deep_Copy_Upper_Easy_Log) :<C-u>call <SID>Easy_Log_Main(0, 2, v:true)<cr>
-
-vnoremap <plug>(Visual_Deep_Copy_Easy_Log) :<C-u>call <SID>Easy_Log_Main(1, 2, v:false)<cr>
-
-vnoremap <plug>(Visual_Deep_Copy_Upper_Easy_Log) :<C-u>call <SID>Easy_Log_Main(1, 2, v:true)<cr>
 " }}}
 
-" ======= 默认映射 ======= {{{
+
+
 if !exists('g:normal_easy_log')
   let g:normal_easy_log='<leader>l'
 endif
 
 if !exists('g:normal_upper_easy_log')
   let g:normal_upper_easy_log='<leader>L'
-endif
-
-if !exists('g:visual_easy_log')
-  let g:visual_easy_log='<leader>l'
-endif
-
-if !exists('g:visual_upper_easy_log')
-  let g:visual_upper_easy_log='<leader>L'
 endif
 
 
@@ -146,32 +125,6 @@ if !exists('g:normal_type_upper_easy_log')
   let g:normal_type_upper_easy_log='<leader>tL'
 endif
 
-if !exists('g:visual_type_easy_log')
-  let g:visual_type_easy_log='<leader>tl'
-endif
-
-if !exists('g:visual_type_upper_easy_log')
-  let g:visual_type_upper_easy_log='<leader>tL'
-endif
-
-
-if !exists('g:normal_deep_copy_easy_log')
-  let g:normal_deep_copy_easy_log='<leader>cl'
-endif
-
-if !exists('g:normal_deep_copy_upper_easy_log')
-  let g:normal_deep_copy_upper_easy_log='<leader>cL'
-endif
-
-if !exists('g:visual_deep_copy_easy_log')
-  let g:visual_deep_copy_easy_log='<leader>cl'
-endif
-
-if !exists('g:visual_deep_copy_upper_easy_log')
-  let g:visual_deep_copy_upper_easy_l='<leader>cL'
-endif
-
-" }}}
 
 
 if !hasmapto('<plug>(Normal_Easy_Log)') || maparg('<leader>l', 'n') ==# ''
@@ -184,7 +137,7 @@ endif
 
 
 if !hasmapto('<plug>(Visual_Easy_Log)') || maparg('<leader>l', 'v') ==# ''
-  execute 'vmap '.g:visual_easy_log.' <Plug>(Visual_Easy_Log)'
+  execute 'vmap '.g:normal_easy_log.' <Plug>(Visual_Easy_Log)'
 endif
 
 if !hasmapto('<plug>(Visual_Upper_Easy_Log)') || maparg('<leader>L', 'v') ==# ''
@@ -202,28 +155,10 @@ endif
 
 
 if !hasmapto('<plug>(Visual_Type_Easy_Log)') || maparg('<leader>tl', 'v') ==# ''
-  execute 'vmap '.g:visual_type_easy_log.' <Plug>(Visual_Type_Easy_Log)'
+  execute 'vmap '.g:normal_type_easy_log.' <Plug>(Visual_Type_Easy_Log)'
 endif
 
 if !hasmapto('<plug>(Visual_Type_Upper_Easy_Log)') || maparg('<leader>tL', 'v') ==# ''
-  execute 'vmap '.g:visual_type_upper_easy_log.' <Plug>(Visual_Type_Upper_Easy_Log)'
-endif
-
-" ==============
-if !hasmapto('<plug>(Normal_Deep_Copy_Easy_Log)') || maparg('<leader>cl', 'n') ==# ''
-  execute 'nmap '.g:normal_deep_copy_easy_log.' <Plug>(Normal_Deep_Copy_Easy_Log)'
-endif
-
-if !hasmapto('<plug>(Normal_Deep_Copy_Upper_Easy_Log)') || maparg('<leader>cL', 'n') ==# ''
-  execute 'nmap '.g:normal_deep_copy_upper_easy_log.' <Plug>(Normal_Deep_Copy_Upper_Easy_Log)'
-endif
-
-
-if !hasmapto('<plug>(Visual_Deep_Copy_Easy_Log)') || maparg('<leader>cl', 'v') ==# ''
-  execute 'vmap '.g:visual_deep_copy_easy_log.' <Plug>(Visual_Deep_Copy_Easy_Log)'
-endif
-
-if !hasmapto('<plug>(Visual_Deep_Copy_Upper_Easy_Log)') || maparg('<leader>cL', 'v') ==# ''
-  execute 'vmap '.g:visual_deep_copy_upper_easy_l.' <Plug>(Visual_Deep_Copy_Upper_Easy_Log)'
+  execute 'vmap '.g:normal_type_upper_easy_log.' <Plug>(Visual_Type_Upper_Easy_Log)'
 endif
 
