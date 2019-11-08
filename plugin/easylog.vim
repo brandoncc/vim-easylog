@@ -1,8 +1,8 @@
 " easylog.vim - log vaiable easily
 " Author: Joey
-" Version: 0.1.0
+" Version: 0.1.2
 
-if exists("g:loaded_easylog") || v:version < 700 || &compatible
+if exists("g:loaded_easylog") || v:version < 700
   finish
 endif
 let g:loaded_easylog = 1
