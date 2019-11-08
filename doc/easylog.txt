@@ -58,7 +58,7 @@ Default set:
 
   let g:easy_log_type_upper_map_key='<leader>tL'
 
-You Could map it to your favourite key.
+You Could remap it to your favourite key.
 
 ====================================================================
 3. Bugs

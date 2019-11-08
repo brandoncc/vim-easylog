@@ -1,15 +1,21 @@
 # vim-easylog
 `<leader>l` to wrap log sentence.
 
-## Usage
+chinese vertion
 
-`<leader>l` to wrap log sentence. `<leader>L` to print it at upper line. 
+## Quick Start
+
+- `<leader>l` to wrap log sentence.
+- `<leader>L` to print it at upper line.
+
+- `<leader>tl` to log variable's type
+- `<leader>tL` to print variable's type, at upper line.
 
 Inspired by [wrap-console-log](https://marketplace.visualstudio.com/items?itemName=midnightsyntax.vscode-wrap-console-log).
 
+## Supported languages
 
-
-Supported languages:
+(print variable a as an example)
 
 - javascript
   `console.log()`
@@ -24,32 +30,52 @@ Supported languages:
 
 ![image-20191102203956540](https://tva1.sinaimg.cn/large/006y8mN6gy1g8jz8awtlhj305q01maa0.jpg)
 
+`<leader>tl`/`<leader>tL`
+
+```js
+console.log("a: ", Object.prototype.toString.call(a))
+```
+
 - golang
   `fmt.Println()`
+  `fmt.Printf("a: %T\n", a)`
 
 ![image-20191102204253328](https://tva1.sinaimg.cn/large/006y8mN6gy1g8jzbddc9rj305g01gt8m.jpg)
 
 - python
   `print()`
+  `print("a: ", type(a))`
 
 ![image-20191102204336708](https://tva1.sinaimg.cn/large/006y8mN6gy1g8jzc4jb6oj303o0133ye.jpg)
 
 - vimscript
-  `echom`
+  `echo “a: ”a`
+  `echom "a: ".type(a)`
 
-![image-20191104213820349](https://tva1.sinaimg.cn/large/006y8mN6gy1g8mc5qbdu7j305001wjrh.jpg)
 
-## Configuration
+## Customerization
 
-- `g:easy_log_configuration_map`
-  log downside, default `<leader>l`
+To change a map, add a |let| statement in your |vimrc|. Example: 
 
-- `g:easy_log_upper_configuration_map`
-  log upperside, default`<leader>L`
+>    let g:easy_log_map_key = "<leader><leader>l"
 
-## TODO:
 
-- [x] configuration remap
-- [ ] deep copy
-- [ ] customization
-  modify the log sentences
+
+Default set:
+
+>   let g:easy_log_map_key = "<leader>l"
+>
+>   let g:easy_log_upper_configuration_map = "<leader>L"
+>
+>   let g:easy_log_type_map_key='<leader>tl'
+>
+>   let g:easy_log_type_upper_map_key='<leader>tL'
+>
+
+You Could remap it to your favourite key.
+
+## Bugs
+
+If you find a bug, please post it on the issue tracker:
+
+https://github.com/joeyZhouYicheng/vim-easylog/issues
