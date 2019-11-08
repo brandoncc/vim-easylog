@@ -108,57 +108,57 @@ vnoremap <plug>(Visual_Type_Upper_Easy_Log) :<C-u>call <SID>Easy_Log_Main(1, 1, 
 
 
 
-if !exists('g:normal_easy_log')
-  let g:normal_easy_log='<leader>l'
+if !exists('g:easy_log_map_key')
+  let g:easy_log_map_key='<leader>l'
 endif
 
-if !exists('g:normal_upper_easy_log')
-  let g:normal_upper_easy_log='<leader>L'
+if !exists('g:easy_log_upper_map_key')
+  let g:easy_log_upper_map_key='<leader>L'
 endif
 
 
-if !exists('g:normal_type_easy_log')
-  let g:normal_type_easy_log='<leader>tl'
+if !exists('g:easy_log_type_map_key')
+  let g:easy_log_type_map_key='<leader>tl'
 endif
 
-if !exists('g:normal_type_upper_easy_log')
-  let g:normal_type_upper_easy_log='<leader>tL'
+if !exists('g:easy_log_type_upper_map_key')
+  let g:easy_log_type_upper_map_key='<leader>tL'
 endif
 
 
 
 if !hasmapto('<plug>(Normal_Easy_Log)') || maparg('<leader>l', 'n') ==# ''
-  execute 'nmap '.g:normal_easy_log.' <Plug>(Normal_Easy_Log)'
+  execute 'nmap '.g:easy_log_map_key.' <Plug>(Normal_Easy_Log)'
 endif
-
-if !hasmapto('<plug>(Normal_Upper_Easy_Log)') || maparg('<leader>L', 'n') ==# ''
-  execute 'nmap '.g:normal_upper_easy_log.' <Plug>(Normal_Upper_Easy_Log)'
-endif
-
 
 if !hasmapto('<plug>(Visual_Easy_Log)') || maparg('<leader>l', 'v') ==# ''
-  execute 'vmap '.g:normal_easy_log.' <Plug>(Visual_Easy_Log)'
+  execute 'vmap '.g:easy_log_map_key.' <Plug>(Visual_Easy_Log)'
+endif
+
+
+if !hasmapto('<plug>(Normal_Upper_Easy_Log)') || maparg('<leader>L', 'n') ==# ''
+  execute 'nmap '.g:easy_log_upper_map_key.' <Plug>(Normal_Upper_Easy_Log)'
 endif
 
 if !hasmapto('<plug>(Visual_Upper_Easy_Log)') || maparg('<leader>L', 'v') ==# ''
-  execute 'vmap '.g:visual_upper_easy_log.' <Plug>(Visual_Upper_Easy_Log)'
+  execute 'vmap '.g:easy_log_upper_map_key.' <Plug>(Visual_Upper_Easy_Log)'
 endif
 
 " ==============
 if !hasmapto('<plug>(Normal_Type_Easy_Log)') || maparg('<leader>tl', 'n') ==# ''
-  execute 'nmap '.g:normal_type_easy_log.' <Plug>(Normal_Type_Easy_Log)'
+  execute 'nmap '.g:easy_log_type_map_key.' <Plug>(Normal_Type_Easy_Log)'
 endif
-
-if !hasmapto('<plug>(Normal_Type_Upper_Easy_Log)') || maparg('<leader>tL', 'n') ==# ''
-  execute 'nmap '.g:normal_type_upper_easy_log.' <Plug>(Normal_Type_Upper_Easy_Log)'
-endif
-
 
 if !hasmapto('<plug>(Visual_Type_Easy_Log)') || maparg('<leader>tl', 'v') ==# ''
-  execute 'vmap '.g:normal_type_easy_log.' <Plug>(Visual_Type_Easy_Log)'
+  execute 'vmap '.g:easy_log_type_map_key.' <Plug>(Visual_Type_Easy_Log)'
+endif
+
+
+if !hasmapto('<plug>(Normal_Type_Upper_Easy_Log)') || maparg('<leader>tL', 'n') ==# ''
+  execute 'nmap '.g:easy_log_type_upper_map_key.' <Plug>(Normal_Type_Upper_Easy_Log)'
 endif
 
 if !hasmapto('<plug>(Visual_Type_Upper_Easy_Log)') || maparg('<leader>tL', 'v') ==# ''
-  execute 'vmap '.g:normal_type_upper_easy_log.' <Plug>(Visual_Type_Upper_Easy_Log)'
+  execute 'vmap '.g:easy_log_type_upper_map_key.' <Plug>(Visual_Type_Upper_Easy_Log)'
 endif
 
