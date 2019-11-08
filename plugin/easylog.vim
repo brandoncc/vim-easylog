@@ -9,7 +9,7 @@
 " -[] 深拷贝打印
 " -[] 变量类型打印
 
-if exists("g:loaded_easylog") || v:version < 700 || &cp
+if exists("g:loaded_easylog") || v:version < 700 || &compatible
   finish
 endif
 let g:loaded_easylog = 1
@@ -174,7 +174,6 @@ endif
 " }}}
 
 
-
 if !hasmapto('<plug>(Normal_Easy_Log)') || maparg('<leader>l', 'n') ==# ''
   execute 'nmap '.g:normal_easy_log.' <Plug>(Normal_Easy_Log)'
 endif
@@ -190,5 +189,41 @@ endif
 
 if !hasmapto('<plug>(Visual_Upper_Easy_Log)') || maparg('<leader>L', 'v') ==# ''
   execute 'vmap '.g:visual_upper_easy_log.' <Plug>(Visual_Upper_Easy_Log)'
+endif
+
+" ==============
+if !hasmapto('<plug>(Normal_Type_Easy_Log)') || maparg('<leader>tl', 'n') ==# ''
+  execute 'nmap '.g:normal_type_easy_log.' <Plug>(Normal_Type_Easy_Log)'
+endif
+
+if !hasmapto('<plug>(Normal_Type_Upper_Easy_Log)') || maparg('<leader>tL', 'n') ==# ''
+  execute 'nmap '.g:normal_type_upper_easy_log.' <Plug>(Normal_Type_Upper_Easy_Log)'
+endif
+
+
+if !hasmapto('<plug>(Visual_Type_Easy_Log)') || maparg('<leader>tl', 'v') ==# ''
+  execute 'vmap '.g:visual_type_easy_log.' <Plug>(Visual_Type_Easy_Log)'
+endif
+
+if !hasmapto('<plug>(Visual_Type_Upper_Easy_Log)') || maparg('<leader>tL', 'v') ==# ''
+  execute 'vmap '.g:visual_type_upper_easy_log.' <Plug>(Visual_Type_Upper_Easy_Log)'
+endif
+
+" ==============
+if !hasmapto('<plug>(Normal_Deep_Copy_Easy_Log)') || maparg('<leader>cl', 'n') ==# ''
+  execute 'nmap '.g:normal_deep_copy_easy_log.' <Plug>(Normal_Deep_Copy_Easy_Log)'
+endif
+
+if !hasmapto('<plug>(Normal_Deep_Copy_Upper_Easy_Log)') || maparg('<leader>cL', 'n') ==# ''
+  execute 'nmap '.g:normal_deep_copy_upper_easy_log.' <Plug>(Normal_Deep_Copy_Upper_Easy_Log)'
+endif
+
+
+if !hasmapto('<plug>(Visual_Deep_Copy_Easy_Log)') || maparg('<leader>cl', 'v') ==# ''
+  execute 'vmap '.g:visual_deep_copy_easy_log.' <Plug>(Visual_Deep_Copy_Easy_Log)'
+endif
+
+if !hasmapto('<plug>(Visual_Deep_Copy_Upper_Easy_Log)') || maparg('<leader>cL', 'v') ==# ''
+  execute 'vmap '.g:visual_deep_copy_upper_easy_l.' <Plug>(Visual_Deep_Copy_Upper_Easy_Log)'
 endif
 
