@@ -1,6 +1,6 @@
 # easylog - 中文readme
 
-光标放在单词上，或用versial选中，输入`<leader>l`来自动生成log语句
+光标放在单词上，或用visual选中，输入`<leader>l`来自动生成log语句
 
 ## 快速上手
 
@@ -46,7 +46,11 @@ echom "a: ".type(a)
 
 ## 重新映射
 
-在`.vimrc`里面修改对应的快捷键即可，默认设置如下：
+如果想修改映射的按键，你只需在`.vimrc`里面加上几句。例子：
+
+>     let g:easy_log_map_key = "<leader><leader>l"
+
+默认值如下：
 
 ```vim
 let g:easy_log_map_key = "<leader>l"

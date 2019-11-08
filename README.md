@@ -1,65 +1,62 @@
 # vim-easylog
-`<leader>l` to wrap log sentence.
 
-chinese vertion
+ `<leader>l` to wrap log sentence. You just need to put your cursor on the word you’d like to log, or select that in visual mode.
+
+[中文版本](https://github.com/joeyZhouYicheng/vim-easylog/blob/master/easylog%20-%20%E4%B8%AD%E6%96%87readme.md)
 
 ## Quick Start
 
-- `<leader>l` to wrap log sentence.
-- `<leader>L` to print it at upper line.
+-   `<leader>l` to wrap log sentence under current line.
 
-- `<leader>tl` to log variable's type
-- `<leader>tL` to print variable's type, at upper line.
+-   `<leader>L` to log it at upper line.
+
+-   `<leader>tl` to log variable's type, under current line.
+
+-   `<leader>tL` to log variable's type, at upper line.
 
 Inspired by [wrap-console-log](https://marketplace.visualstudio.com/items?itemName=midnightsyntax.vscode-wrap-console-log).
 
 ## Supported languages
 
-(print variable a as an example)
+Suppose we’d like to print variable `a`
 
-- javascript
-  `console.log()`
-
-![image-20191102203820373](https://tva1.sinaimg.cn/large/006y8mN6gy1g8jz6oaqhpj304b00wdfp.jpg)
-
-`<leader>l`:
-
-![image-20191102203836994](https://tva1.sinaimg.cn/large/006y8mN6gy1g8jz6x9k0hj306001idfs.jpg)
-
-`<leader>L`
-
-![image-20191102203956540](https://tva1.sinaimg.cn/large/006y8mN6gy1g8jz8awtlhj305q01maa0.jpg)
-
-`<leader>tl`/`<leader>tL`
+-   javascript
 
 ```js
+// <leader>l
+console.log("a", a)
+
+// <leader>tl
 console.log("a: ", Object.prototype.toString.call(a))
 ```
 
-- golang
-  `fmt.Println()`
-  `fmt.Printf("a: %T\n", a)`
 
-![image-20191102204253328](https://tva1.sinaimg.cn/large/006y8mN6gy1g8jzbddc9rj305g01gt8m.jpg)
+-   golang
 
-- python
-  `print()`
-  `print("a: ", type(a))`
+```go
+fmt.Println("a", a)
+fmt.Printf("a: %T\n", a)
+```
 
-![image-20191102204336708](https://tva1.sinaimg.cn/large/006y8mN6gy1g8jzc4jb6oj303o0133ye.jpg)
+-   python
 
-- vimscript
-  `echo “a: ”a`
-  `echom "a: ".type(a)`
+```python
+print("a", a)
+print("a: ", type(a))
+```
 
+-   vimscript
+
+```vim
+echo "a: "a
+echom "a: ".type(a)
+```
 
 ## Customerization
 
-To change a map, add a |let| statement in your |vimrc|. Example: 
+To change a map, add a `let` statement in your `vimrc`. Example: 
 
 >    let g:easy_log_map_key = "<leader><leader>l"
-
-
 
 Default set:
 
@@ -70,7 +67,6 @@ Default set:
 >   let g:easy_log_type_map_key='<leader>tl'
 >
 >   let g:easy_log_type_upper_map_key='<leader>tL'
->
 
 You Could remap it to your favourite key.
 
@@ -78,4 +74,4 @@ You Could remap it to your favourite key.
 
 If you find a bug, please post it on the issue tracker:
 
-https://github.com/joeyZhouYicheng/vim-easylog/issues
+<https://github.com/joeyZhouYicheng/vim-easylog/issues>
