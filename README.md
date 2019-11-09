@@ -30,7 +30,6 @@ console.log("a", a)
 console.log("a: ", Object.prototype.toString.call(a))
 ```
 
-
 -   golang
 
 ```go
