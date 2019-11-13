@@ -11,6 +11,7 @@ let g:loaded_easylog = 1
 " map {{{
 let s:log_map={
       \'javascript':['console.log("', '", ', ')'],
+      \'typescript':['console.log("', '", ', ')'],
       \'go':['fmt.Println("', '", ', ')'],
       \'python':['print("', '", ', ')'],
       \'vim':['echo "', ': "',''],
@@ -18,6 +19,7 @@ let s:log_map={
 
 let s:type_map={
       \'javascript':['console.log("', ': ", Object.prototype.toString.call(', '))'],
+      \'typescript':['console.log("', ': ", Object.prototype.toString.call(', '))'],
       \'go':['fmt.Printf("', ': %T\n", ', ')'],
       \'python':['print("', ': ", type(', '))'],
       \'vim':['echom "', ': ".type(',')'],
