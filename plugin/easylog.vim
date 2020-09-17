@@ -7,9 +7,16 @@ if exists("g:loaded_easylog") || v:version < 700
 endif
 let g:loaded_easylog = 1
 
+if !exists("g:easy_log_log_map")
+  let g:easy_log_log_map = {}
+endif
+
+if !exists("g:easy_log_type_map")
+  let g:easy_log_type_map = {}
+endif
 
 " map {{{
-let s:log_map={
+let s:default_log_map={
       \'javascript':['console.log("', '", ', ')'],
       \'typescript':['console.log("', '", ', ')'],
       \'go':['fmt.Println("', '", ', ')'],
@@ -17,13 +24,16 @@ let s:log_map={
       \'vim':['echo "', ': "',''],
       \}
 
-let s:type_map={
+let s:default_type_map={
       \'javascript':['console.log("', ': ", Object.prototype.toString.call(', '))'],
       \'typescript':['console.log("', ': ", Object.prototype.toString.call(', '))'],
       \'go':['fmt.Printf("', ': %T\n", ', ')'],
       \'python':['print("', ': ", type(', '))'],
       \'vim':['echom "', ': ".type(',')'],
       \}
+
+let s:log_map = extend(s:default_log_map, g:easy_log_log_map)
+let s:type_map = extend(s:default_type_map, g:easy_log_type_map)
 " }}}
 
 " tools {{{
